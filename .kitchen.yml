@@ -1,6 +1,40 @@
+# this is a test kitchen for dual ec2 deployments
 ---
 driver:
-  name: vagrant
+  #name: vagrant
+  name: ec2
+  security_group_ids: ["sg-0d3d136a"]
+  subnet_id: subnet-ae035cca
+  region: us-west-1
+  availability_zone: a
+  require_chef_omnibus: true
+  instance_type: t2.medium
+  #name: docker
+  aws_ssh_key_id: rudy-mbp
+  vpc_mode: true
+  vpc: vpc-cca323a8
+  interface: public
+  iam_profile_name: openvpn-server
+  associate_public_ip: true
+  shared_credentials_profile: dev-gg
+
+driver:
+  name: ec2
+  security_group_ids: ["sg-0d3d136a"]
+  subnet_id: subnet-ae035cca
+  region: us-west-2
+  availability_zone: a
+  require_chef_omnibus: true
+  instance_type: t2.medium
+  #name: docker
+  aws_ssh_key_id: rudy-mbp
+  vpc_mode: true
+  vpc: vpc-cca323a8
+  interface: public
+  iam_profile_name: openvpn-server
+  associate_public_ip: true
+  shared_credentials_profile: prod-gg
+
 
 provisioner:
   name: chef_zero
@@ -14,12 +48,19 @@ verifier:
 
 platforms:
   - name: ubuntu-16.04
-  - name: centos-7.3
+  #- name: centos-6.7
+  #- name: centos-7.2
+  #- name: ubuntu-12.04
+  #- name: ubuntu-14.04
+  #- name: centos-7.3
+    transport:
+      ssh_key: ~/.ssh/rudy-mbp.pem
+      aws_ssh_key_id: rudy-mbp
 
 suites:
-  - name: default
+  - name: gg-dev
     run_list:
-      - recipe[chefserver-bootstrap::default]
+      - recipe[chefserver-bootstrap::setup]
     verifier:
       inspec_tests:
         - test/smoke/default
