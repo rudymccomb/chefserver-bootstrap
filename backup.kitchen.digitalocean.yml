@@ -1,0 +1,51 @@
+---
+driver:
+  name: digitalocean
+
+provisioner:
+  name: chef_zero
+
+platforms:<% %w{ubuntu-12-04-x64 ubuntu-14-04-x64}.each do |p| %>
+  - name: <%= p %>
+    driver_config:
+      size: 1gb
+      region: sfo1
+      private_networking: false
+    run_list:
+    - recipe[apt]<% end %>
+  - name: centos-6-4-x64
+    driver_config:
+      size: 2gb
+      region:
+      private_networking: false
+    run_list:
+    - recipe[chefserver-bootstrap:setup]
+     ssh_key_only: true
+
+suites:
+  - name: default
+    run_list:
+    #  - recipe[chefserver-bootstrap::setup]
+    verifier:
+      inspec_tests:
+        - test/smoke/default
+    attributes:
+---
+driver:
+  - name: digitalocean
+
+provisioner:
+  name: chef_zero
+  require_chef_omnibus: latest
+
+platforms:
+- name: ubuntu-12-04-x64
+  driver_config:
+    region: sfo1
+    size: 512mb
+
+suites:
+- name: default
+  run_list:
+  - recipe[chevserver-bootstrap::setup]
+  attributes: {}

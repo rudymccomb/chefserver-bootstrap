@@ -18,23 +18,6 @@ driver:
   associate_public_ip: true
   shared_credentials_profile: dev-gg
 
-driver:
-  name: ec2
-  security_group_ids: ["sg-0d3d136a"]
-  subnet_id: subnet-ae035cca
-  region: us-west-2
-  availability_zone: a
-  require_chef_omnibus: true
-  instance_type: t2.medium
-  #name: docker
-  aws_ssh_key_id: rudy-mbp
-  vpc_mode: true
-  vpc: vpc-cca323a8
-  interface: public
-  iam_profile_name: openvpn-server
-  associate_public_ip: true
-  shared_credentials_profile: prod-gg
-
 
 provisioner:
   name: chef_zero
