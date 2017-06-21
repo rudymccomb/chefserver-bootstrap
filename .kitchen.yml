@@ -43,7 +43,7 @@ platforms:
 suites:
   - name: gg-dev
     run_list:
-      - recipe[chefserver-bootstrap::setup]
+      - recipe[chefserver_bootstrap::setup]
     verifier:
       inspec_tests:
         - test/smoke/default

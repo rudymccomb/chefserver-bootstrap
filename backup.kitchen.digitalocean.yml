@@ -19,13 +19,13 @@ platforms:<% %w{ubuntu-12-04-x64 ubuntu-14-04-x64}.each do |p| %>
       region:
       private_networking: false
     run_list:
-    - recipe[chefserver-bootstrap:setup]
+    - recipe[chefserver_bootstrap:setup]
      ssh_key_only: true
 
 suites:
   - name: default
     run_list:
-    #  - recipe[chefserver-bootstrap::setup]
+    #  - recipe[chefserver_bootstrap::setup]
     verifier:
       inspec_tests:
         - test/smoke/default

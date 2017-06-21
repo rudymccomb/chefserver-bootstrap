@@ -1,4 +1,4 @@
-# chefserver-bootstrap
+# chefserver_bootstrap
 
 TODO: Enter the cookbook description here.
 

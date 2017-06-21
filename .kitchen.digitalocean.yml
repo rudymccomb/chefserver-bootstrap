@@ -22,5 +22,5 @@ transport:
 suites:
 - name: default
   run_list:
-    - recipe[chefserver-bootstrap::default]
+    - recipe[chefserver_bootstrap::default]
   attributes: {}

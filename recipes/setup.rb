@@ -1,4 +1,4 @@
-include_recipe 'chefserver-bootstrap::sshkeys'
+include_recipe 'chefserver_bootstrap::sshkeys'
 
 # Install Chef Server
 chef_ingredient "chef-server" do
